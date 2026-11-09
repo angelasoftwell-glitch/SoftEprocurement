@@ -38,13 +38,19 @@
   function add() {
     if (typeof data === 'undefined' || typeof render !== 'function') return false;
     if (data.some(function (x) { return x && x.ref === REF; })) return true;
-    var it = typeof window.portalItem === 'function' ? window.portalItem(P) : { type: 'Fournitures', ref: REF, title: P.consultation.titre_public, desc: P.consultation.description_public, entity: 'Projet Appui Développement Local', place: 'Antananarivo', lots: 'Lot unique', pub: '09 nov. · 09:00', end: '09 déc. · 10:04', days: '30 jours', _softmarche: true, _payload: P };
-    it.ref = REF; it._payload = P; it._demo371 = true;
+    var it = typeof window.portalItem === 'function' ? window.portalItem(P) : { type: 'Fournitures', ref: REF, title: P.consultation.titre_public, desc: P.consultation.description_public, entity: 'Projet Appui Développement Local', place: 'Antananarivo', lots: 'Lot unique', pub: '09 nov. · 09:00', end: '09 déc. · 10:04', days: '30 jours', _payload: P };
+    it.ref = REF; it._payload = P; it._demo371 = true; delete it._softmarche; /* pas retirée par la synchronisation des publications du back-office */
     data.unshift(it);
     try { render(data); } catch (e) {}
     return true;
   }
   function tryAdd(n) { if (!add() && n > 0) setTimeout(function () { tryAdd(n - 1); }, 300); }
+  /* garde la démonstration en tête de la liste complète, même après la synchronisation des publications */
+  var pr = window.render;
+  if (typeof pr === 'function') window.render = function (a) {
+    try { if (typeof data !== 'undefined' && a === data) { var i = data.findIndex(function (x) { return x && x.ref === REF; }); if (i > 0) data.unshift(data.splice(i, 1)[0]); } } catch (e) {}
+    return pr.apply(this, arguments);
+  };
   if (document.readyState === 'complete') setTimeout(function () { tryAdd(10); }, 600);
   else window.addEventListener('load', function () { setTimeout(function () { tryAdd(10); }, 600); });
 })();
