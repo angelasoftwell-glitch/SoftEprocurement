@@ -17,7 +17,8 @@
         if (q.value) short = short.charAt(0).toUpperCase() + short.slice(1);
         return reqRow(Object.assign({}, q, { label: short }));
       }).join('');
-      return '<div class="cj-card"><div class="cj-h"><span class="cj-cat">' + esc(c.categorie || '') + '</span><b>' + esc(lib) + '</b>' + /* V371b : pas d'éliminatoire, de mode d'évaluation, d'exigence ni de points côté soumissionnaire */
+      return '<div class="cj-card"><div class="cj-h"><span class="cj-cat">' + esc(c.categorie || '') + '</span><b>' + esc(lib) + '</b>' + /* V371c : ni mode d'évaluation ni points ; seuil requis et « Obligatoire » (critère éliminatoire) affichés discrètement */
+        (c.eliminatoire ? '<span class="cj-tag">Obligatoire</span>' : '') + (rules ? '<span class="cj-tag">' + esc(rules) + '</span>' : '') +
         ((c.instructions || c.description) ? '<small>' + esc(c.instructions || c.description) + '</small>' : '') + '</div><div class="v52-doc-list">' + rows + '</div></div>';
     }).join('');
   }
