@@ -17,7 +17,7 @@
         if (q.value) short = short.charAt(0).toUpperCase() + short.slice(1);
         return reqRow(Object.assign({}, q, { label: short }));
       }).join('');
-      return '<div class="cj-card"><div class="cj-h"><span class="cj-cat">' + esc(c.categorie || '') + '</span><b>' + esc(lib) + '</b>' + (c.eliminatoire ? '<span class="cj-tag el">Éliminatoire</span>' : '') + (c.mode_evaluation === 'Note' && c.note_max ? '<span class="cj-tag">' + esc(c.note_max) + ' pts</span>' : '') + (rules ? '<span class="cj-tag">' + esc(rules) + '</span>' : c.mode_evaluation && c.mode_evaluation !== 'Note' ? '<span class="cj-tag">' + esc(c.mode_evaluation) + '</span>' : '') +
+      return '<div class="cj-card"><div class="cj-h"><span class="cj-cat">' + esc(c.categorie || '') + '</span><b>' + esc(lib) + '</b>' + /* V371b : pas d'éliminatoire, de mode d'évaluation, d'exigence ni de points côté soumissionnaire */
         ((c.instructions || c.description) ? '<small>' + esc(c.instructions || c.description) + '</small>' : '') + '</div><div class="v52-doc-list">' + rows + '</div></div>';
     }).join('');
   }
