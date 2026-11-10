@@ -1,7 +1,15 @@
 # Soft e-procurement — maquette
 
 Maquette HTML autonome de Soft e-procurement (back-office + portail des opérateurs économiques).
-Ouvrir `maquette/SoftEprocurement_V373_charte_Softwell.html` dans un navigateur.
+Ouvrir `maquette/SoftEprocurement_V374_charte_Softwell.html` dans un navigateur.
+
+## V374 (10/11/2026) — Report de date limite : présentation revue
+
+- Fiche de la consultation publiée : encadré simplifié (vignettes date limite actuelle / ouverture / date initiale, bouton « Reporter la date limite », lien vers l'historique).
+- Nouveau sous-menu **Passation des marchés › Consultation & Publication › Reports de date limite** : historique de tous les reports en frise chronologique, filtre par consultation, indicateurs.
+- Fenêtre de report réorganisée en 3 étapes (nouvelle date avec aperçu de l'ouverture, motif, effets).
+
+Source : `src/v374/v374_report.js` (remplace `src/v373/v373_report.js` ; le script portail reste `src/v373/v373_portal.js`).
 
 ## V373 (10/11/2026) — Report de la date limite de dépôt
 
@@ -48,7 +56,7 @@ Source : `src/v372/v372_demo.js`.
 Le modèle de données (`d.finance`, offre déposée) reste compatible avec la réception et l'évaluation.
 
 ## Contenu
-- `maquette/` : maquette V373 (fichier unique).
+- `maquette/` : maquette V374 (fichier unique).
 - `src/v372/` : script des exemples de démonstration (V372).
 - `captures/` : captures avant / après.
 - `src/v371/` : scripts ajoutés ou remplacés dans la V371 (pour relecture).
