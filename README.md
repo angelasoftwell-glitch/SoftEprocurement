@@ -1,7 +1,17 @@
 # Soft e-procurement — maquette
 
 Maquette HTML autonome de Soft e-procurement (back-office + portail des opérateurs économiques).
-Ouvrir `maquette/SoftEprocurement_V372_charte_Softwell.html` dans un navigateur.
+Ouvrir `maquette/SoftEprocurement_V373_charte_Softwell.html` dans un navigateur.
+
+## V373 (10/11/2026) — Report de la date limite de dépôt
+
+- Back-office, Consultation & Publication, fiche d'une consultation « Publiée » : encadré « Date limite de dépôt des offres » avec le bouton **Reporter la date limite** et l'**historique des reports** (ancienne / nouvelle date, motif, décision, additif, auteur, opérateurs notifiés).
+- Contrôles : nouvelle date postérieure à l'actuelle et dans le futur, motif et justification obligatoires, alerte jour non ouvré, report impossible après la date limite ou après l'ouverture.
+- Effets : ouverture des offres recalculée, additif « Report de la date limite » publié, notification des opérateurs (offres déposées, DAO retirés), trace dans l'historique de la consultation.
+- Portail : bandeau « Date limite reportée » (ancienne date barrée), date mise à jour dans les dates clés, additif dans l'onglet Additifs.
+- Exemple de démonstration : CONS-DEMO-PAYANT-001 reportée une fois.
+
+Source : `src/v373/`.
 
 ## V372 (10/11/2026) — Démonstration client
 
@@ -38,7 +48,7 @@ Source : `src/v372/v372_demo.js`.
 Le modèle de données (`d.finance`, offre déposée) reste compatible avec la réception et l'évaluation.
 
 ## Contenu
-- `maquette/` : maquette V372 (fichier unique).
+- `maquette/` : maquette V373 (fichier unique).
 - `src/v372/` : script des exemples de démonstration (V372).
 - `captures/` : captures avant / après.
 - `src/v371/` : scripts ajoutés ou remplacés dans la V371 (pour relecture).
