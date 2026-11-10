@@ -38,6 +38,7 @@ Source : `src/v372/v372_demo.js`.
 Le modèle de données (`d.finance`, offre déposée) reste compatible avec la réception et l'évaluation.
 
 ## Contenu
-- `maquette/` : maquette V371 (fichier unique).
+- `maquette/` : maquette V372 (fichier unique).
+- `src/v372/` : script des exemples de démonstration (V372).
 - `captures/` : captures avant / après.
 - `src/v371/` : scripts ajoutés ou remplacés dans la V371 (pour relecture).
