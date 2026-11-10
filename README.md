@@ -1,7 +1,18 @@
 # Soft e-procurement — maquette
 
 Maquette HTML autonome de Soft e-procurement (back-office + portail des opérateurs économiques).
-Ouvrir `maquette/SoftEprocurement_V374_charte_Softwell.html` dans un navigateur.
+Ouvrir `maquette/SoftEprocurement_V375_charte_Softwell.html` dans un navigateur.
+
+## V375 (10/11/2026) — Notation pondérée des critères techniques
+
+- Référentiel : le critère garde son barème et sa **note du barème** (ex. TEC-007 noté sur 20, TEC-008 sur 100).
+- DAO › Grille de critères › Technique : colonnes **Note du barème** et **Points DAO** (saisissables) ; contrôle « somme des points DAO = 100 » (au lieu de la somme des notes du barème) ; **simulation** de la note pondérée.
+- Évaluation : points obtenus = note obtenue ÷ note du barème × points DAO ; note globale arrondie à 2 décimales ; en-têtes « barème /20 → 30 pts DAO ».
+- Portail : points DAO affichés par critère technique noté.
+- Compatibilité : sans points DAO saisis, les points = note du barème (DAO existants inchangés).
+- Exemple : DAO-2026-DEMO-POND (Brouillon), chef de projet 30 pts + RAM 70 pts → 10/20 et 75/100 donnent 67,5/100, non qualifié (seuil 70).
+
+Source : `src/v375/`.
 
 ## V374 (10/11/2026) — Report de date limite : présentation revue
 
@@ -56,7 +67,7 @@ Source : `src/v372/v372_demo.js`.
 Le modèle de données (`d.finance`, offre déposée) reste compatible avec la réception et l'évaluation.
 
 ## Contenu
-- `maquette/` : maquette V374 (fichier unique).
+- `maquette/` : maquette V375 (fichier unique).
 - `src/v372/` : script des exemples de démonstration (V372).
 - `captures/` : captures avant / après.
 - `src/v371/` : scripts ajoutés ou remplacés dans la V371 (pour relecture).
