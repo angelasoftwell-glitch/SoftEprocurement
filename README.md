@@ -1,7 +1,7 @@
 # Soft e-procurement — maquette
 
 Maquette HTML autonome de Soft e-procurement (back-office + portail des opérateurs économiques).
-Ouvrir `maquette/SoftEprocurement_V371_charte_Softwell.html` dans un navigateur.
+Ouvrir `maquette/SoftEprocurement_V372_charte_Softwell.html` dans un navigateur.
 
 ## V372 (10/11/2026) — Démonstration client
 
