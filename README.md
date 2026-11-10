@@ -3,6 +3,16 @@
 Maquette HTML autonome de Soft e-procurement (back-office + portail des opérateurs économiques).
 Ouvrir `maquette/SoftEprocurement_V371_charte_Softwell.html` dans un navigateur.
 
+## V372 (10/11/2026) — Démonstration client
+
+Un exemple concret dans chaque menu qui était vide (données injectées une seule fois, sans écraser les saisies) :
+- Exécution : avenant approuvé (CTR-2027-001) et avenant en projet à approuver (CTR-2027-002), pénalité appliquée, suspension puis reprise, réceptions (provisoire avec réserves, partielle), réclamations (en instruction, acceptée).
+- Candidatures / Présélection : appel AMI-2026-0042 (maîtrise d'œuvre de 3 CSB II) avec 4 candidatures, dont 2 déjà qualifiées.
+- Infructuosité : historique de 3 décisions.
+- Administration & Audit et Habilitations : utilisateurs, matrice des habilitations, structures, contrôles de conformité, journal d'audit, sécurité et intégrations (badge « Exemple de démonstration »).
+
+Source : `src/v372/v372_demo.js`.
+
 ## V371 (09/11/2026)
 
 ### Back-office — DAO › Lots & Prix
