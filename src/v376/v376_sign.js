@@ -45,13 +45,13 @@
   function nbSig(c) { return c.signataires.filter(function (s) { return s.statut === 'Signé'; }).length + '/' + c.signataires.length; }
   function actions(c) {
     var s = statutAff(c), b = function (act, lab, p) { return '<button class="v134-btn' + (p ? ' primary' : '') + '" data-v376="' + act + '" data-no="' + esc(c.no) + '">' + lab + '</button>'; };
-    if (s === 'Bloqué — garantie') return b('garantie', 'Voir la garantie', true);
-    if (s === 'À préparer') return b('zones', 'Configurer les zones', true);
-    if (s === 'Prêt à envoyer') return b('envoyer', 'Envoyer à SoftSign', true) + b('zones', 'Modifier les zones');
-    if (s === 'En attente de signature') return b('suivre', 'Suivre', true) + b('relancer', 'Relancer') + b('annuler', 'Annuler l’envoi');
-    if (s === 'Refusé' || s === 'Expiré') return b('motif', 'Voir le motif', true) + b('renvoyer', 'Renvoyer');
-    if (s === 'Signé') return b('telecharger', 'Télécharger', true) + b('registre', 'Contrats signés');
-    return '';
+    var cs = b('consulter', 'Consulter');
+    if (s === 'Bloqué — garantie') return b('garantie', 'Voir la garantie', true) + cs;
+    if (s === 'À préparer' || s === 'Prêt à envoyer') return b('zones', 'Configurer les zones', true) + cs;
+    if (s === 'En attente de signature') return b('suivre', 'Suivre', true) + cs;
+    if (s === 'Refusé' || s === 'Expiré') return b('motif', 'Voir le motif', true) + cs;
+    if (s === 'Signé') return b('telecharger', 'Télécharger', true) + cs;
+    return cs;
   }
   function etapes(c) {
     var s = c.statut, n = c.signataires;
@@ -74,7 +74,9 @@
       '<div class="v376cols"><div><h4>Signataires</h4><table class="v134-table"><thead><tr><th>Ordre</th><th>Signataire</th><th>Qualité</th><th>Organisation</th><th>Mode</th><th>Statut</th><th>Date</th></tr></thead><tbody>' +
       c.signataires.map(function (s, i) { return '<tr><td>' + (i + 1) + '</td><td>' + esc(s.nom) + '</td><td>' + esc(s.qualite) + '</td><td>' + esc(s.org) + '</td><td>Électronique</td><td>' + pill(s.statut === 'En attente' ? 'En attente de signature' : s.statut === 'À venir' ? 'À préparer' : s.statut).replace('À préparer', 'À venir') + '</td><td>' + esc(s.date || '—') + '</td></tr>'; }).join('') +
       '</tbody></table></div><div><h4>Historique</h4><ul class="v376hist">' + c.hist.slice().reverse().map(function (h) { return '<li><small>' + esc(h.d) + '</small>' + esc(h.a) + '</li>'; }).join('') + '</ul></div></div>' +
-      (c.statut === 'En attente de signature' ? '<div class="v376demo"><span>Démonstration</span><button class="v134-btn" data-v376="simuler" data-no="' + esc(c.no) + '">Simuler la signature suivante</button></div>' : '') +
+      (c.statut === 'En attente de signature' ? '<div class="v376demo"><button class="v134-btn" data-v376="relancer" data-no="' + esc(c.no) + '">Relancer le signataire</button><button class="v134-btn" data-v376="annuler" data-no="' + esc(c.no) + '">Annuler l’envoi</button><span style="margin-left:auto">Démonstration</span><button class="v134-btn" data-v376="simuler" data-no="' + esc(c.no) + '">Simuler la signature suivante</button></div>' : '') +
+      (c.statut === 'Refusé' || c.statut === 'Expiré' ? '<div class="v376demo"><button class="v134-btn primary" data-v376="renvoyer" data-no="' + esc(c.no) + '">Corriger et renvoyer</button></div>' : '') +
+      (c.statut === 'Signé' ? '<div class="v376demo"><button class="v134-btn" data-v376="registre" data-no="' + esc(c.no) + '">Voir dans Contrats signés</button></div>' : '') +
       '</div></td></tr>';
   }
   function realRows() {
@@ -120,11 +122,11 @@
   }
   function find(no) { return L.find(function (c) { return c.no === no; }); }
   function toast(t) { var d = document.createElement('div'); d.className = 'v376toast'; d.innerHTML = t; document.body.appendChild(d); setTimeout(function () { d.remove(); }, 4200); }
-  function modal(title, sub, body, okLab, onOk) {
+  function modal(title, sub, body, okLab, onOk, ok2Lab, onOk2, closeLab) {
     var m = document.createElement('div'); m.className = 'v376m';
-    m.innerHTML = '<div class="v376dlg"><div class="v376mh"><div><b>' + title + '</b><small>' + sub + '</small></div><button class="v134-btn" data-x>✕</button></div><div class="v376mb">' + body + '</div><div class="v376mf"><button class="v134-btn" data-x>Annuler</button>' + (okLab ? '<button class="v134-btn primary" data-ok>' + okLab + '</button>' : '') + '</div></div>';
+    m.innerHTML = '<div class="v376dlg"><div class="v376mh"><div><b>' + title + '</b><small>' + sub + '</small></div><button class="v134-btn" data-x>✕</button></div><div class="v376mb">' + body + '</div><div class="v376mf"><button class="v134-btn" data-x>' + (closeLab || 'Annuler') + '</button>' + (ok2Lab ? '<button class="v134-btn" data-ok2>' + ok2Lab + '</button>' : '') + (okLab ? '<button class="v134-btn primary" data-ok>' + okLab + '</button>' : '') + '</div></div>';
     document.body.appendChild(m);
-    m.addEventListener('click', function (e) { if (e.target === m || e.target.closest('[data-x]')) m.remove(); if (e.target.closest('[data-ok]')) { if (onOk(m) !== false) m.remove(); } });
+    m.addEventListener('click', function (e) { if (e.target === m || e.target.closest('[data-x]')) m.remove(); if (e.target.closest('[data-ok]')) { if (onOk(m) !== false) m.remove(); } if (e.target.closest('[data-ok2]')) { if (onOk2(m) !== false) m.remove(); } });
     return m;
   }
   function zones(c) {
@@ -132,8 +134,20 @@
     var row = function (s, i) { return '<tr><td>' + (i + 1) + '</td><td><b>' + esc(s.nom) + '</b><br><small>' + esc(s.qualite) + '</small></td><td><select class="v134-select" data-pg><option>Dernière page (p. 12)</option><option>Page 11</option></select></td><td><select class="v134-select" data-pos>' + pos.map(function (p, j) { return '<option' + (j === i ? ' selected' : '') + '>' + p + '</option>'; }).join('') + '</select></td><td><label><input type="checkbox" checked> Paraphe</label></td></tr>'; };
     modal('Configurer les zones de signature', esc(c.no) + ' · Contrat_' + esc(c.no) + '_' + esc(c.version) + '.pdf',
       '<div class="v376zg"><div class="v376page"><div class="v376lines"></div><div class="v376zone z0">1 · ' + esc(c.signataires[0].nom) + '<br><small>Autorité contractante</small></div><div class="v376zone z1">2 · ' + esc(c.signataires[1].nom) + '<br><small>' + esc(c.tit) + '</small></div><span class="v376pn">Page 12 / 12</span></div>' +
-      '<div><p style="margin:0 0 8px;font-size:12.5px;color:#5b606d">Placez la zone de chaque signataire. L’ordre de signature suit l’ordre du tableau. Le paraphe est apposé sur chaque page.</p><table class="v134-table"><thead><tr><th>Ordre</th><th>Signataire</th><th>Page</th><th>Position</th><th></th></tr></thead><tbody>' + c.signataires.map(row).join('') + '</tbody></table></div></div>',
-      'Enregistrer les zones', function () { c.zones = true; if (c.statut === 'À préparer') c.statut = 'Prêt à envoyer'; c.hist.push({ d: now(), a: 'Zones de signature configurées (2 signataires)' }); save(); OPEN = c.no; render(); toast('Zones enregistrées : <b>' + esc(c.no) + '</b> est prêt à être envoyé à SoftSign.'); });
+      '<div><p style="margin:0 0 8px;font-size:12.5px;color:#5b606d">Placez la zone de chaque signataire. L’ordre de signature suit l’ordre du tableau. Le paraphe est apposé sur chaque page.</p><table class="v134-table"><thead><tr><th>Ordre</th><th>Signataire</th><th>Page</th><th>Position</th><th></th></tr></thead><tbody>' + c.signataires.map(row).join('') + '</tbody></table>' +
+      '<div class="v376send"><div class="v134-field"><label>Date limite de signature</label><input class="v134-input" id="v376lim" value="' + plus(7) + '"></div><div class="v134-field"><label>Message aux signataires</label><input class="v134-input" value="Merci de bien vouloir signer électroniquement le contrat ' + esc(c.no) + '."></div></div>' +
+      '<p style="margin:8px 0 0;font-size:12px;color:#5b606d">« Enregistrer les zones » garde le contrat au statut « Prêt à envoyer ». « Envoyer à SoftSign » enregistre les zones et lance le circuit de signature.</p></div></div>',
+      'Envoyer à SoftSign', function (m) { if (!c.zones) c.hist.push({ d: now(), a: 'Zones de signature configurées (2 signataires)' }); c.zones = true; c.statut = 'En attente de signature'; c.envoye = today(); c.limite = m.querySelector('#v376lim').value; c.signataires[0].statut = 'En attente'; c.hist.push({ d: now(), a: 'Envoyé à SoftSign — date limite ' + c.limite }); save(); OPEN = c.no; render(); toast('Envoyé à SoftSign. Statut : <b>En attente de signature</b>. ' + esc(c.signataires[0].nom) + ' a été notifié.'); },
+      'Enregistrer les zones', function () { c.zones = true; if (c.statut === 'À préparer') c.statut = 'Prêt à envoyer'; c.hist.push({ d: now(), a: 'Zones de signature configurées (2 signataires)' }); save(); OPEN = c.no; render(); toast('Zones enregistrées : <b>' + esc(c.no) + '</b> est prêt à envoyer.'); });
+  }
+  function consulter(c) {
+    var info = function (l, v) { return '<div><small>' + l + '</small><b>' + v + '</b></div>'; };
+    modal('Contrat ' + esc(c.no), esc(c.objet) + ' · ' + esc(c.tit),
+      '<div class="v376zg"><div class="v376page v376doc"><b>CONTRAT N° ' + esc(c.no) + '</b><small>' + esc(c.objet) + '</small><div class="v376lines" style="top:70px;height:170px"></div><span class="v376pn">Page 1 / 12</span></div>' +
+      '<div><div class="v376sum" style="grid-template-columns:1fr 1fr">' + info('Titulaire', esc(c.tit)) + info('Montant', esc(c.montant)) + info('Version', esc(c.version) + ' · visa du ' + esc(c.visa)) + info('Statut de signature', pill(statutAff(c))) +
+      info('Garantie de bonne exécution', c.garantie === 'Validée' ? '<span style="color:#047857">✓ Validée</span>' : '<span style="color:#b91c1c">' + esc(c.garantie) + ' — bloquante</span>') + info('Signatures', nbSig(c)) + '</div>' +
+      '<h4 style="margin:14px 0 6px;font-size:13px;color:#18244f">Documents</h4><div class="v376docs"><div>📄 Contrat_' + esc(c.no) + '_' + esc(c.version) + '.pdf <small>version visée</small></div>' + (c.statut === 'Signé' ? '<div>✅ Contrat_' + esc(c.no) + '_SIGNE.pdf <small>signé le ' + esc(c.signe) + '</small></div><div>🔒 Certificat_SoftSign_' + esc(c.no) + '.pdf <small>preuve de signature</small></div>' : '') + '<div>📎 Annexes (CCAP, CCTP, bordereau des prix)</div></div></div></div>',
+      c.statut === 'Signé' ? 'Télécharger le contrat signé' : 'Télécharger le PDF', function () { toast('Téléchargement : <b>Contrat_' + esc(c.no) + (c.statut === 'Signé' ? '_SIGNE' : '_' + esc(c.version)) + '.pdf</b> (démonstration).'); return false; }, null, null, 'Fermer');
   }
   function envoyer(c) {
     modal('Envoyer à SoftSign', esc(c.no) + ' · ' + esc(c.tit),
@@ -167,6 +181,7 @@
     if (b) {
       e.stopPropagation(); var c = find(b.dataset.no); if (!c) return; var a = b.dataset.v376;
       if (a === 'zones') zones(c);
+      else if (a === 'consulter') consulter(c);
       else if (a === 'envoyer') envoyer(c);
       else if (a === 'garantie') { go('v134-guarantees'); toast('Garantie de <b>' + esc(c.no) + '</b> à fournir et valider avant la signature.'); }
       else if (a === 'suivre') { OPEN = OPEN === c.no ? null : c.no; render(); }
@@ -207,6 +222,7 @@
 .v376dlg{background:#fff;border-radius:14px;width:min(980px,100%);max-height:90vh;display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.25)}
 .v376mh{display:flex;justify-content:space-between;align-items:flex-start;padding:16px 20px;border-bottom:1px solid #e9ebf0}.v376mh b{display:block;color:#18244f;font-size:16px}.v376mh small{color:#5b606d;font-size:12px}
 .v376mb{padding:16px 20px;overflow:auto}.v376mf{display:flex;justify-content:flex-end;gap:8px;padding:12px 20px;border-top:1px solid #e9ebf0}
+.v376send{display:grid;grid-template-columns:180px 1fr;gap:10px;margin-top:12px}.v376doc{padding:16px;text-align:center}.v376doc b{display:block;color:#18244f;font-size:12px}.v376doc small{font-size:10.5px;color:#5b606d}.v376docs div{padding:7px 0;border-bottom:1px dashed #e3e6ee;font-size:12.5px;color:#2e427b}.v376docs small{color:#969ba8;margin-left:6px}
 .v376zg{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px}.v376dlg .v134-select{width:100%;min-width:0;padding:7px 8px}.v376dlg .v134-table td,.v376dlg .v134-table th{padding:9px 8px}.v376t td:nth-child(2) strong{white-space:nowrap}
 .v376page{position:relative;height:300px;border:1px solid #d6d9e0;border-radius:6px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .v376lines{position:absolute;left:18px;right:18px;top:20px;height:150px;background:repeating-linear-gradient(#fff 0 9px,#e9ebf0 9px 11px)}

@@ -6,7 +6,8 @@ Ouvrir `maquette/SoftEprocurement_V375_charte_Softwell.html` dans un navigateur.
 ## V376 (11/11/2026) — Signature électronique / SoftSign : liste des contrats
 
 - Le menu affiche d'abord la liste des contrats visés, triée du plus urgent au plus avancé (recherche + filtre par statut).
-- Statuts et actions : Bloqué — garantie (Voir la garantie) · À préparer (Configurer les zones) · Prêt à envoyer (Envoyer à SoftSign) · En attente de signature (Suivre, Relancer, Annuler l'envoi) · Refusé / Expiré (Voir le motif, Renvoyer) · Signé (Télécharger, Contrats signés).
+- Action « Consulter » sur chaque ligne (fiche du contrat et documents).
+- Statuts et actions : Bloqué — garantie (Voir la garantie) · À préparer / Prêt à envoyer (Configurer les zones, avec « Envoyer à SoftSign » à la fin de la configuration) · En attente de signature (Suivre ; relance et annulation dans le détail) · Refusé (Voir le motif) · Signé (Télécharger).
 - Clic sur une ligne : circuit en 6 étapes, signataires, historique.
 - Une garantie bloquante non validée empêche l'envoi à SoftSign.
 - Fin de signature : contrat signé généré automatiquement, statut « Signé », ajout aux Contrats signés.
