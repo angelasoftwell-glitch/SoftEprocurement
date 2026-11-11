@@ -3,6 +3,15 @@
 Maquette HTML autonome de Soft e-procurement (back-office + portail des opérateurs économiques).
 Ouvrir `maquette/SoftEprocurement_V375_charte_Softwell.html` dans un navigateur.
 
+## V377 (11/11/2026) — Bons de commande
+
+- Un seul sous-menu : Contractualisation › Bons de commande (tout le cycle se gère dans la fiche du BC).
+- Création par liaison (attribution ou accord-cadre : données reprises, plafond contrôlé) ou par saisie manuelle (ligne PPM ou hors PPM).
+- Hors PPM : motif, ligne budgétaire, seuil de dispense, alerte anti-fractionnement ; onglet de contrôle dédié.
+- Circuit : Brouillon → En validation → Approuvé (engagement Softaccounting) → Notifié → Réceptionné → Facturé (écriture fournisseur) → Payé (retour compta) → Clôturé.
+- Onglet Suivi financier par ligne budgétaire (crédit, engagé, payé, disponible).
+- Source : `src/v377/v377_bc.js`.
+
 ## V376 (11/11/2026) — Signature électronique / SoftSign : liste des contrats
 
 - Le menu affiche d'abord la liste des contrats visés, triée du plus urgent au plus avancé (recherche + filtre par statut).
