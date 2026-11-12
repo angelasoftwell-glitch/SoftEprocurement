@@ -136,3 +136,7 @@ Le modèle de données (`d.finance`, offre déposée) reste compatible avec la r
 - Saisie : liste des devises (conversion indicative pour comparer au seuil).
 - Liste : badge « fractionnement » supprimé ; après validation, boutons Éditer et Réceptionner ; menu ⋮ = Consulter, Modifier, Annuler.
 - Onglet « Contrôle des seuils » remplacé par « Génération BC » : BC validés à générer ; un BC généré sort de la liste.
+
+## V385 — État de suivi financier des BC
+- Tableau : N° BC, Objet, Fournisseur, Activités, Montant, Facturé, Payé, Reste à payer (+ barre d'avancement).
+- Vue d'ensemble graphique : étapes Engagé → Facturé → Payé → Reste à payer et anneau de répartition du montant.
