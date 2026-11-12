@@ -140,3 +140,6 @@ Le modèle de données (`d.finance`, offre déposée) reste compatible avec la r
 ## V385 — État de suivi financier des BC
 - Tableau : N° BC, Objet, Fournisseur, Activités, Montant, Facturé, Payé, Reste à payer (+ barre d'avancement).
 - Vue d'ensemble graphique : étapes Engagé → Facturé → Payé → Reste à payer et anneau de répartition du montant.
+
+## V386 — Bons de commande
+- Suppression des KPI en haut des pages BC.
