@@ -1,0 +1,246 @@
+<title>Intégration du bon de commande</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+/* Layout: one reading column, two wide diagrams (where the BC sits, then its cycle across the three systems) */
+:root{
+  --bg:#f5f7fb; --surface:#ffffff; --fg:#1b2438; --muted:#5a6680; --line:#c5cddc;
+  --accent:#1f5fbf; --accent-soft:#e3ecfb;
+  --compta:#2d7a57; --compta-soft:#e2f2ea;
+  --portal:#6b4cb0; --portal-soft:#eee8fa;
+  --warn:#a3620a;
+  --display:"Space Grotesk",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121826; --surface:#1b2335; --fg:#e6ebf5; --muted:#9aa6bf; --line:#38445e;
+  --accent:#7aa8ff; --accent-soft:#1f3359; --compta:#6fcf9f; --compta-soft:#173a2b;
+  --portal:#b9a1f2; --portal-soft:#2e2650; --warn:#e7a948; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121826; --surface:#1b2335; --fg:#e6ebf5; --muted:#9aa6bf; --line:#38445e;
+  --accent:#7aa8ff; --accent-soft:#1f3359; --compta:#6fcf9f; --compta-soft:#173a2b;
+  --portal:#b9a1f2; --portal-soft:#2e2650; --warn:#e7a948; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55}
+main{max-width:1080px;margin:0 auto;padding-block:32px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:28px}
+h1,h2{font-family:var(--display);text-wrap:balance;margin:0}
+h1{font-size:1.9rem;line-height:1.2}
+h2{font-size:1.25rem}
+p{margin:0;max-width:68ch}
+.eyebrow{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600}
+header{display:grid;gap:8px}
+section{display:grid;gap:12px}
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow-x:auto;padding:12px}
+.fig svg{display:block;min-width:900px;width:100%;height:auto}
+svg text{font-family:var(--body);font-size:12.5px;fill:var(--fg)}
+svg .h{font-family:var(--display);font-weight:600;font-size:14px}
+svg .s{font-size:11.5px;fill:var(--muted)}
+svg .b{font-weight:600}
+svg .ac{fill:var(--accent)} svg .cp{fill:var(--compta)} svg .pt{fill:var(--portal)} svg .wn{fill:var(--warn)}
+.zone{fill:none;stroke:var(--line);stroke-width:1.2}
+.box{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
+.new{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2}
+.cbox{fill:var(--compta-soft);stroke:var(--compta);stroke-width:1.2}
+.pbox{fill:var(--portal-soft);stroke:var(--portal);stroke-width:1.2}
+.note{fill:none;stroke:var(--warn);stroke-width:1.2;stroke-dasharray:5 4}
+.ln{stroke:var(--muted);stroke-width:1.4;fill:none}
+.lnA{stroke:var(--accent);stroke-width:1.8;fill:none}
+.lnC{stroke:var(--compta);stroke-width:1.8;fill:none}
+.lnP{stroke:var(--portal);stroke-width:1.8;fill:none}
+.dash{stroke-dasharray:5 4}
+.mk{fill:var(--muted)} .mkA{fill:var(--accent)} .mkC{fill:var(--compta)} .mkP{fill:var(--portal)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.card h3{margin:0;font-size:.95rem;font-family:var(--display)}
+.card ul{margin:0;padding-left:18px;color:var(--muted)}
+.card li{margin:2px 0}
+.tag{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+</style>
+
+<main>
+<header>
+  <span class="eyebrow">Soft e-procurement · nouvelle fonctionnalité</span>
+  <h1>Intégration du bon de commande</h1>
+  <p>Le bon de commande (BC) sert aux achats qui ne passent pas par un contrat. Il s'ajoute comme sous-menu de Contractualisation, sans lien avec le PPM. Il est créé dans Procurement puis généré vers Softaccounting. En retour, un état de suivi financier affiche, pour chaque BC, les données de Softaccounting : engagé, facturé, payé, reste à payer.</p>
+</header>
+
+<section>
+  <h2>1. Où se place le BC dans l'application</h2>
+  <div class="fig">
+  <svg viewBox="0 0 1000 530" role="img" aria-label="Place du sous-menu Bons de commande dans Soft e-procurement, avec Softaccounting et le portail fournisseur">
+    <defs>
+      <marker id="m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk"/></marker>
+      <marker id="mA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mkA"/></marker>
+      <marker id="mC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mkC"/></marker>
+      <marker id="mP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mkP"/></marker>
+    </defs>
+
+    <!-- Back office -->
+    <rect class="zone" x="20" y="20" width="680" height="390" rx="10"/>
+    <text class="h" x="36" y="44">Soft e-procurement · back office</text>
+
+    <rect class="box" x="40" y="64" width="150" height="40" rx="6"/>
+    <text x="115" y="89" text-anchor="middle">Planification (PPM)</text>
+    <rect class="box" x="210" y="64" width="110" height="40" rx="6"/>
+    <text x="265" y="89" text-anchor="middle">Passation</text>
+    <rect class="box" x="340" y="64" width="180" height="40" rx="6"/>
+    <text class="b" x="430" y="89" text-anchor="middle">Contractualisation</text>
+    <rect class="box" x="545" y="64" width="145" height="40" rx="6"/>
+    <text x="617" y="89" text-anchor="middle">Exécution</text>
+    <path class="ln" d="M190 84H208" marker-end="url(#m)"/>
+    <path class="ln" d="M320 84H338" marker-end="url(#m)"/>
+    <path class="ln" d="M520 84H543" marker-end="url(#m)"/>
+
+    <!-- No PPM link -->
+    <path class="ln dash" d="M115 104V130"/>
+    <rect class="note" x="40" y="130" width="250" height="74" rx="6"/>
+    <text class="b wn" x="54" y="152">Aucun lien avec le PPM</text>
+    <text class="s" x="54" y="172">Le PPM reste réservé aux contrats.</text>
+    <text class="s" x="54" y="190">Le BC n'y est jamais inscrit.</text>
+
+    <!-- Submenu -->
+    <path class="ln" d="M350 104V308"/>
+    <g>
+      <path class="ln" d="M350 132H360"/><rect class="box" x="360" y="118" width="160" height="28" rx="5"/><text x="372" y="137">Contrats</text>
+      <path class="ln" d="M350 166H360"/><rect class="box" x="360" y="152" width="160" height="28" rx="5"/><text x="372" y="171">Validation / visa</text>
+      <path class="ln" d="M350 200H360"/><rect class="box" x="360" y="186" width="160" height="28" rx="5"/><text x="372" y="205">Garanties</text>
+      <path class="ln" d="M350 234H360"/><rect class="box" x="360" y="220" width="160" height="28" rx="5"/><text x="372" y="239">Signature SoftSign</text>
+      <path class="ln" d="M350 268H360"/><rect class="box" x="360" y="254" width="160" height="28" rx="5"/><text x="372" y="273">Contrats signés</text>
+      <path class="lnA" d="M350 308H360"/><rect class="new" x="360" y="290" width="160" height="36" rx="6"/><text class="b ac" x="372" y="313">Bons de commande</text>
+    </g>
+    <text class="s ac" x="440" y="344" text-anchor="middle">nouveau sous-menu</text>
+
+    <!-- Controls -->
+    <rect class="new" x="545" y="118" width="145" height="134" rx="6"/>
+    <text class="b ac" x="557" y="139">État de suivi</text>
+    <text class="b ac" x="557" y="156">financier des BC</text>
+    <text class="s" x="557" y="178">Montant du BC</text>
+    <text class="s" x="557" y="196">Engagé · Facturé</text>
+    <text class="s" x="557" y="214">Payé · Reste à payer</text>
+    <text class="s" x="557" y="236">lecture seule</text>
+    <path class="lnA dash" d="M520 296L575 254" marker-end="url(#mA)"/>
+
+    <!-- Manual entry -->
+    <rect class="box" x="40" y="283" width="250" height="50" rx="6"/>
+    <text class="b" x="54" y="304">Création du BC</text>
+    <text class="s" x="54" y="322">Achat hors contrat, saisi ici</text>
+    <path class="lnA" d="M290 308H340" marker-end="url(#mA)"/>
+    <text class="s" x="40" y="356">Contrôles avant validation : seuil BC,</text>
+    <text class="s" x="40" y="373">ligne budgétaire, crédit, anti-fractionnement.</text>
+
+    <!-- Softaccounting -->
+    <rect class="zone" x="740" y="20" width="240" height="390" rx="10"/>
+    <text class="h" x="756" y="44">Softaccounting</text>
+    <text class="s" x="756" y="62">logiciel de comptabilité</text>
+    <rect class="cbox" x="756" y="118" width="208" height="122" rx="6"/>
+    <text class="b cp" x="770" y="140">Données financières</text>
+    <text x="770" y="162">Engagé</text>
+    <text x="770" y="182">Facturé</text>
+    <text x="770" y="202">Payé</text>
+    <text class="s" x="770" y="224">saisies par la comptabilité</text>
+    <path class="lnC" d="M756 178H694" marker-end="url(#mC)"/>
+    <text class="s cp" x="722" y="170" text-anchor="middle">retour</text>
+
+    <rect class="cbox" x="756" y="283" width="208" height="50" rx="6"/>
+    <text class="b" x="770" y="304">BC reçu de Procurement</text>
+    <text class="s" x="770" y="322">engagement créé en compta</text>
+    <path class="lnA" d="M522 308H754" marker-end="url(#mA)"/>
+    <text class="b ac" x="638" y="300" text-anchor="middle">Génération</text>
+    <text class="s" x="638" y="326" text-anchor="middle">à l'approbation</text>
+
+    <!-- Portal -->
+    <path class="lnP" d="M440 350V438" marker-start="url(#mP)" marker-end="url(#mP)"/>
+    <text class="s pt" x="452" y="390">BC notifié</text>
+    <text class="s pt" x="452" y="406">réponses du fournisseur</text>
+    <rect class="pbox" x="20" y="440" width="680" height="76" rx="10"/>
+    <text class="h pt" x="36" y="466">Portail opérateur économique · Mes bons de commande</text>
+    <text x="36" y="492">Reçoit le BC · accuse réception · déclare la livraison · dépose la facture</text>
+  </svg>
+  </div>
+</section>
+
+<section>
+  <h2>2. Cycle du BC et échanges</h2>
+  <p>Chaque statut du BC se lit dans la ligne du milieu. Les flèches vertes montrent ce qui part vers Softaccounting ou en revient (ces retours alimentent l'état de suivi financier), les flèches violettes ce que fait le fournisseur sur le portail.</p>
+  <div class="fig">
+  <svg viewBox="0 0 1000 330" role="img" aria-label="Cycle de vie du bon de commande sur trois couloirs : portail fournisseur, Soft e-procurement, Softaccounting">
+    <defs>
+      <marker id="n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk"/></marker>
+      <marker id="nC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mkC"/></marker>
+      <marker id="nP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mkP"/></marker>
+    </defs>
+    <!-- lanes -->
+    <rect class="zone" x="10" y="10" width="980" height="96" rx="8"/>
+    <rect class="zone" x="10" y="116" width="980" height="100" rx="8"/>
+    <rect class="zone" x="10" y="226" width="980" height="96" rx="8"/>
+    <text class="b pt" x="22" y="52">Portail</text><text class="s" x="22" y="70">fournisseur</text>
+    <text class="b ac" x="22" y="160">Soft e-</text><text class="b ac" x="22" y="177">procurement</text>
+    <text class="b cp" x="22" y="268">Soft-</text><text class="b cp" x="22" y="285">accounting</text>
+
+    <!-- statuses: x = 120 + i*108, w 96 -->
+    <g>
+      <rect class="box" x="120" y="140" width="96" height="44" rx="6"/><text x="168" y="166" text-anchor="middle">Brouillon</text>
+      <rect class="box" x="228" y="140" width="96" height="44" rx="6"/><text x="276" y="166" text-anchor="middle">En validation</text>
+      <rect class="new" x="336" y="140" width="96" height="44" rx="6"/><text class="b" x="384" y="166" text-anchor="middle">Approuvé</text>
+      <rect class="new" x="444" y="140" width="96" height="44" rx="6"/><text class="b" x="492" y="166" text-anchor="middle">Notifié</text>
+      <rect class="box" x="552" y="140" width="96" height="44" rx="6"/><text x="600" y="166" text-anchor="middle">Réceptionné</text>
+      <rect class="box" x="660" y="140" width="96" height="44" rx="6"/><text x="708" y="166" text-anchor="middle">Facturé</text>
+      <rect class="box" x="768" y="140" width="96" height="44" rx="6"/><text x="816" y="166" text-anchor="middle">Payé</text>
+      <rect class="box" x="876" y="140" width="96" height="44" rx="6"/><text x="924" y="166" text-anchor="middle">Clôturé</text>
+      <path class="ln" d="M216 162H226" marker-end="url(#n)"/>
+      <path class="ln" d="M324 162H334" marker-end="url(#n)"/>
+      <path class="ln" d="M432 162H442" marker-end="url(#n)"/>
+      <path class="ln" d="M540 162H550" marker-end="url(#n)"/>
+      <path class="ln" d="M648 162H658" marker-end="url(#n)"/>
+      <path class="ln" d="M756 162H766" marker-end="url(#n)"/>
+      <path class="ln" d="M864 162H874" marker-end="url(#n)"/>
+      <text class="s wn" x="276" y="204" text-anchor="middle">ou Rejeté → Brouillon</text>
+    </g>
+
+    <!-- Softaccounting events -->
+    <rect class="cbox" x="336" y="250" width="96" height="50" rx="6"/><text x="384" y="271" text-anchor="middle">BC généré</text><text class="s" x="384" y="289" text-anchor="middle">+ engagement</text>
+    <path class="lnC" d="M384 184V248" marker-end="url(#nC)"/>
+    <rect class="cbox" x="660" y="250" width="96" height="50" rx="6"/><text x="708" y="271" text-anchor="middle">Facture</text><text class="s" x="708" y="289" text-anchor="middle">enregistrée</text>
+    <path class="lnC" d="M708 184V248" marker-end="url(#nC)"/>
+    <rect class="cbox" x="768" y="250" width="96" height="50" rx="6"/><text x="816" y="271" text-anchor="middle">Paiement</text><text class="s" x="816" y="289" text-anchor="middle">retour au BC</text>
+    <path class="lnC" d="M816 250V186" marker-end="url(#nC)"/>
+
+    <!-- Portal events -->
+    <rect class="pbox" x="444" y="32" width="96" height="50" rx="6"/><text x="492" y="53" text-anchor="middle">BC reçu</text><text class="s" x="492" y="71" text-anchor="middle">accusé envoyé</text>
+    <path class="lnP" d="M492 140V84" marker-end="url(#nP)"/>
+    <rect class="pbox" x="552" y="32" width="96" height="50" rx="6"/><text x="600" y="53" text-anchor="middle">Livraison</text><text class="s" x="600" y="71" text-anchor="middle">déclarée</text>
+    <path class="lnP" d="M600 84V138" marker-end="url(#nP)"/>
+    <rect class="pbox" x="660" y="32" width="96" height="50" rx="6"/><text x="708" y="53" text-anchor="middle">Facture</text><text class="s" x="708" y="71" text-anchor="middle">déposée</text>
+    <path class="lnP" d="M708 84V138" marker-end="url(#nP)"/>
+  </svg>
+  </div>
+</section>
+
+<section>
+  <h2>3. Aller et retour avec Softaccounting</h2>
+  <div class="cards">
+    <div class="card">
+      <h3><span class="tag" style="background:var(--accent)"></span>Aller : Procurement génère le BC</h3>
+      <ul>
+        <li>Le BC est toujours créé dans Procurement.</li>
+        <li>À l'approbation, il est envoyé à Softaccounting, qui crée l'engagement.</li>
+        <li>On ne reprend jamais un BC saisi dans Softaccounting.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="tag" style="background:var(--compta)"></span>Retour : état de suivi financier</h3>
+      <ul>
+        <li>Les données viennent de Softaccounting : engagé, facturé, payé.</li>
+        <li>L'état affiche par BC le reste à payer et la situation de la ligne budgétaire.</li>
+        <li>Il est en lecture seule dans Procurement.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="tag" style="background:var(--warn)"></span>Règles communes</h3>
+      <ul>
+        <li>Montant au-dessus du seuil BC : il faut un contrat.</li>
+        <li>Cumul par fournisseur suivi pour éviter le fractionnement.</li>
+        <li>Pas d'inscription au PPM.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>

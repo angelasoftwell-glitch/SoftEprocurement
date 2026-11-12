@@ -98,3 +98,9 @@ Le modèle de données (`d.finance`, offre déposée) reste compatible avec la r
 - `src/v372/` : script des exemples de démonstration (V372).
 - `captures/` : captures avant / après.
 - `src/v371/` : scripts ajoutés ou remplacés dans la V371 (pour relecture).
+
+## V379 — Bon de commande : création dans Procurement, suivi financier depuis Softaccounting
+- Le BC est toujours créé dans Procurement (plus de reprise d'un BC saisi dans Softaccounting).
+- À l'approbation, le BC est généré dans Softaccounting, qui crée l'engagement.
+- Nouvel onglet « État de suivi financier » : par BC, engagé / facturé / payé / reste à payer lus dans Softaccounting (lecture seule, bouton « Actualiser depuis Softaccounting »).
+- Schéma d'intégration : `src/v379/schema_integration_BC.html`.
