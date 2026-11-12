@@ -104,3 +104,10 @@ Le modèle de données (`d.finance`, offre déposée) reste compatible avec la r
 - À l'approbation, le BC est généré dans Softaccounting, qui crée l'engagement.
 - Nouvel onglet « État de suivi financier » : par BC, engagé / facturé / payé / reste à payer lus dans Softaccounting (lecture seule, bouton « Actualiser depuis Softaccounting »).
 - Schéma d'intégration : `src/v379/schema_integration_BC.html`.
+
+## V380 — Bon de commande : liens avec Procurement et gestion des seuils
+- Fournisseur choisi dans le référentiel des opérateurs économiques (commun aux contrats) ; un fournisseur exclu bloque le BC.
+- Financement et ligne budgétaire issus des référentiels communs aux contrats, avec contrôle du crédit disponible.
+- Circuit de validation : Demandeur → RAF (visa) → PRMP / ordonnateur (signature), mêmes habilitations que le visa des contrats ; affiché dans le formulaire et la fiche du BC.
+- Nouvelle page Paramétrage › Bons de commande : seuil par type d'achat (Fournitures / Services / Travaux), alerte « proche du seuil », cumul bloquant ou alerte, période du cumul, format de numérotation, modèle d'impression.
+- Contrôle des seuils par fournisseur et type d'achat, selon le paramétrage.
