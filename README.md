@@ -150,3 +150,7 @@ Le modèle de données (`d.finance`, offre déposée) reste compatible avec la r
 ## V388 — Réception des BC
 - Fenêtre de réception par article : commandé, déjà reçu, reste, reçu ce jour, avancement.
 - Réceptions successives (n°, date, bon de livraison, réserves) jusqu au solde ; statut partiel ou total calculé automatiquement.
+
+## V389 — Test de bout en bout des BC
+- 58 contrôles passés (tests/test_bout_en_bout_bc.js, Playwright).
+- Correction : la saisie dans un champ (quantité, prix, objet, échéance) n était plus perdue quand on cliquait sur le champ suivant.

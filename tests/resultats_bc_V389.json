@@ -1,0 +1,350 @@
+[
+ {
+  "id": "1.1",
+  "lib": "Menu Contractualisation › Bons de commande ouvre la page",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "1.2",
+  "lib": "Pas de KPI ni bandeau en haut de page",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "1.3",
+  "lib": "3 onglets : Bons de commande, Génération BC, État de suivi financier",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "1.4",
+  "lib": "Colonnes de la liste",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "1.5",
+  "lib": "7 BC d’exemple",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "2.1",
+  "lib": "N° BC automatique sous l’objet",
+  "ok": true,
+  "info": "BC-2026-008"
+ },
+ {
+  "id": "2.2",
+  "lib": "Étape 1 incomplète : passage aux articles refusé",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "2.3",
+  "lib": "Catégorie filtrée par le financement",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "2.4",
+  "lib": "Fournisseur exclu (BTP RAPIDE) : contrôle bloquant affiché",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "2.5",
+  "lib": "Fournisseur exclu : enregistrement refusé",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "2.6",
+  "lib": "Échéances ≠ 100 % : enregistrement refusé",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "2.7",
+  "lib": "Enregistrement : statut « En attente de validation » automatique",
+  "ok": true,
+  "info": "En attente de validation"
+ },
+ {
+  "id": "2.8",
+  "lib": "Instance créée dans Validation (type Bons de commande, workflow BC)",
+  "ok": true,
+  "info": "[\"À traiter\",\"En attente\",\"En attente\"]"
+ },
+ {
+  "id": "3.1",
+  "lib": "Menu ⋮ : Consulter, Modifier, Annuler",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "3.2",
+  "lib": "Pas de bouton Éditer/Réceptionner avant validation",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "3.3",
+  "lib": "Modification avant toute décision enregistrée",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "4.1",
+  "lib": "Validation › Retourner : BC « À corriger »",
+  "ok": true,
+  "info": "À corriger"
+ },
+ {
+  "id": "4.2",
+  "lib": "BC à corriger : Modifier actif dans le menu",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "4.3",
+  "lib": "Correction : BC renvoyé en validation",
+  "ok": true,
+  "info": "En attente de validation / En cours"
+ },
+ {
+  "id": "5.1",
+  "lib": "Après une 1re décision : Modifier grisé",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "5.2",
+  "lib": "Toutes les étapes validées : BC « Validé »",
+  "ok": true,
+  "info": "Validé"
+ },
+ {
+  "id": "5.3",
+  "lib": "Le BC est visible dans le module Validation",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "5.4",
+  "lib": "BC validé : boutons Éditer et Réceptionner",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "6.1",
+  "lib": "Choix du modèle à l’édition",
+  "ok": true,
+  "info": "MOD-BC-01,MOD-BC-02"
+ },
+ {
+  "id": "6.2",
+  "lib": "Aperçu mis à jour selon le modèle",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "6.3",
+  "lib": "Édition tracée dans l’historique",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "7.1",
+  "lib": "Onglet Génération : BC validés non générés",
+  "ok": true,
+  "info": "BC-2026-004,BC-2026-008"
+ },
+ {
+  "id": "7.2",
+  "lib": "Compteur sur l’onglet",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "7.3",
+  "lib": "Changement de financement : catégories rechargées",
+  "ok": true,
+  "info": "CAT-04,CAT-05"
+ },
+ {
+  "id": "7.4",
+  "lib": "Contrôle du crédit affiché",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "7.5",
+  "lib": "Générer : engagement créé, imputation modifiée enregistrée",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "7.6",
+  "lib": "BC généré : sort de la liste Génération BC",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "7.7",
+  "lib": "Statut reste « Validé » avec pastille SA",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "8.1",
+  "lib": "Message « réception partielle » avant enregistrement",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "8.2",
+  "lib": "Réception partielle : statut et %",
+  "ok": true,
+  "info": "Réceptionné partiellement 40 %"
+ },
+ {
+  "id": "8.3",
+  "lib": "Suite : reste proposé = 6, déjà reçu = 4",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "8.4",
+  "lib": "Quantité supérieure au reste plafonnée ; BC « Réceptionné »",
+  "ok": true,
+  "info": "Réceptionné 10"
+ },
+ {
+  "id": "8.5",
+  "lib": "BC réceptionné : seul Éditer reste ; Annuler grisé",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "9.1",
+  "lib": "Annulation sans motif refusée",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "9.2",
+  "lib": "Annuler un BC en attente : statut Annulé, validation arrêtée",
+  "ok": true,
+  "info": "Annulé / Annulé"
+ },
+ {
+  "id": "9.3",
+  "lib": "Annuler un BC généré : engagement annulé dans SoftAccounting",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "10.1",
+  "lib": "Validation › Rejeter : BC « Rejeté »",
+  "ok": true,
+  "info": "Rejeté"
+ },
+ {
+  "id": "11.1",
+  "lib": "Paramétrage : seuil, devise, gestion du dépassement, workflow",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "11.2",
+  "lib": "Mode « Bloquer » : BC au-delà du seuil refusé",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "11.3",
+  "lib": "Mode « PPM » : bouton « Transmettre au PPM »",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "11.4",
+  "lib": "BC au-delà du seuil : statut « Transmis au PPM », pas de validation",
+  "ok": true,
+  "info": "Transmis au PPM"
+ },
+ {
+  "id": "11.5",
+  "lib": "Devise MGA : montant converti et comparé au seuil EUR",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "11.6",
+  "lib": "BC en MGA enregistré",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "11.7",
+  "lib": "Montant affiché en MGA dans la liste",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "12.1",
+  "lib": "Numérotation : fenêtre commune avec le PPM, objet « Bon de commande »",
+  "ok": true,
+  "info": "BC-2026-011"
+ },
+ {
+  "id": "12.2",
+  "lib": "Nouveau BC prend le nouveau préfixe",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "13.1",
+  "lib": "Colonnes du suivi financier",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "13.2",
+  "lib": "Actualiser : facturé et payé évoluent",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "13.3",
+  "lib": "BC annulé (003) : engagement annulé, reste 0",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "14.1",
+  "lib": "Filtre par statut",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "14.2",
+  "lib": "Clic sur la ligne : consultation (circuit, échanges compta, historique)",
+  "ok": true,
+  "info": ""
+ },
+ {
+  "id": "14.3",
+  "lib": "Données conservées après rechargement",
+  "ok": true,
+  "info": "BC-2026-001:Réceptionné, BC-2026-002:Réceptionné, BC-2026-003:Annulé, BC-2026-004:Validé, BC-2026-005:Rejeté, BC-2026-006:Annulé, BC-2026-007:Annulé, BC-2026-008:Réceptionné, BC-2026-009:Transmis au PPM, BC-2026-010:En attente de validation"
+ },
+ {
+  "id": "15.1",
+  "lib": "Aucune erreur JavaScript venant du module BC",
+  "ok": true,
+  "info": "erreurs préexistantes de l’application : 17"
+ }
+]
