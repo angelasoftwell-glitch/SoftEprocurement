@@ -146,3 +146,7 @@ Le modèle de données (`d.finance`, offre déposée) reste compatible avec la r
 
 ## V387 — Bons de commande
 - Tableau de la liste uniformisé : largeurs fixes, lignes de même hauteur (texte sur 2 lignes max, complet au survol), actions alignées, pastille « SA ✓ » compacte.
+
+## V388 — Réception des BC
+- Fenêtre de réception par article : commandé, déjà reçu, reste, reçu ce jour, avancement.
+- Réceptions successives (n°, date, bon de livraison, réserves) jusqu au solde ; statut partiel ou total calculé automatiquement.
