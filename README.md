@@ -3,6 +3,14 @@
 Maquette HTML autonome de Soft e-procurement (back-office + portail des opérateurs économiques).
 Ouvrir `maquette/SoftEprocurement_V375_charte_Softwell.html` dans un navigateur.
 
+## V378 (12/11/2026) — Bons de commande sans lien avec le PPM
+
+- Le BC est réservé aux achats hors contrats : plus de ligne PPM ni de notion « hors PPM ».
+- Création par liaison (BC récupéré de Softaccounting) ou par saisie manuelle (envoyé à Softaccounting à l'approbation).
+- Contrôles : objet, seuil du BC (au-delà, contrat obligatoire), crédit de la ligne budgétaire, fournisseur, anti-fractionnement par fournisseur sur l'année.
+- Onglet « Contrôle des seuils » : cumul annuel par fournisseur.
+- Source : `src/v378/v378_bc.js`.
+
 ## V377 (11/11/2026) — Bons de commande
 
 - Un seul sous-menu : Contractualisation › Bons de commande (tout le cycle se gère dans la fiche du BC).
