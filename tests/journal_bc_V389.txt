@@ -1,0 +1,59 @@
+PASS 1.1 Menu Contractualisation › Bons de commande ouvre la page
+PASS 1.2 Pas de KPI ni bandeau en haut de page
+PASS 1.3 3 onglets : Bons de commande, Génération BC, État de suivi financier
+PASS 1.4 Colonnes de la liste | N° BC|Objet|Fournisseur|Activité|Montant TTC|Date|Statut|Actions
+PASS 1.5 7 BC d’exemple
+PASS 2.1 N° BC automatique sous l’objet | BC-2026-008
+PASS 2.2 Étape 1 incomplète : passage aux articles refusé
+PASS 2.3 Catégorie filtrée par le financement | CAT-01,CAT-02,CAT-03
+PASS 2.4 Fournisseur exclu (BTP RAPIDE) : contrôle bloquant affiché
+PASS 2.5 Fournisseur exclu : enregistrement refusé
+PASS 2.6 Échéances ≠ 100 % : enregistrement refusé
+PASS 2.7 Enregistrement : statut « En attente de validation » automatique | En attente de validation
+PASS 2.8 Instance créée dans Validation (type Bons de commande, workflow BC) | ["À traiter","En attente","En attente"]
+PASS 3.1 Menu ⋮ : Consulter, Modifier, Annuler | Consulter|Modifier|Annuler le BC
+PASS 3.2 Pas de bouton Éditer/Réceptionner avant validation
+PASS 3.3 Modification avant toute décision enregistrée
+PASS 4.1 Validation › Retourner : BC « À corriger » | À corriger
+PASS 4.2 BC à corriger : Modifier actif dans le menu
+PASS 4.3 Correction : BC renvoyé en validation | En attente de validation / En cours
+PASS 5.1 Après une 1re décision : Modifier grisé
+PASS 5.2 Toutes les étapes validées : BC « Validé » | Validé
+PASS 5.3 Le BC est visible dans le module Validation
+PASS 5.4 BC validé : boutons Éditer et Réceptionner
+PASS 6.1 Choix du modèle à l’édition | MOD-BC-01,MOD-BC-02
+PASS 6.2 Aperçu mis à jour selon le modèle
+PASS 6.3 Édition tracée dans l’historique
+PASS 7.1 Onglet Génération : BC validés non générés | BC-2026-004,BC-2026-008
+PASS 7.2 Compteur sur l’onglet | 2
+PASS 7.3 Changement de financement : catégories rechargées | CAT-04,CAT-05
+PASS 7.4 Contrôle du crédit affiché
+PASS 7.5 Générer : engagement créé, imputation modifiée enregistrée
+PASS 7.6 BC généré : sort de la liste Génération BC
+PASS 7.7 Statut reste « Validé » avec pastille SA
+PASS 8.1 Message « réception partielle » avant enregistrement
+PASS 8.2 Réception partielle : statut et % | Réceptionné partiellement 40 %
+PASS 8.3 Suite : reste proposé = 6, déjà reçu = 4
+PASS 8.4 Quantité supérieure au reste plafonnée ; BC « Réceptionné » | Réceptionné 10
+PASS 8.5 BC réceptionné : seul Éditer reste ; Annuler grisé
+PASS 9.1 Annulation sans motif refusée
+PASS 9.2 Annuler un BC en attente : statut Annulé, validation arrêtée | Annulé / Annulé
+PASS 9.3 Annuler un BC généré : engagement annulé dans SoftAccounting
+PASS 10.1 Validation › Rejeter : BC « Rejeté » | Rejeté
+PASS 11.1 Paramétrage : seuil, devise, gestion du dépassement, workflow
+PASS 11.2 Mode « Bloquer » : BC au-delà du seuil refusé
+PASS 11.3 Mode « PPM » : bouton « Transmettre au PPM » | Transmettre au PPM
+PASS 11.4 BC au-delà du seuil : statut « Transmis au PPM », pas de validation | Transmis au PPM
+PASS 11.5 Devise MGA : montant converti et comparé au seuil EUR | ✓ Montant 2 000 000 MGA HT (≈ 400 EUR) ≤ seuil du BC (20 000 EUR)
+PASS 11.6 BC en MGA enregistré
+PASS 11.7 Montant affiché en MGA dans la liste
+PASS 12.1 Numérotation : fenêtre commune avec le PPM, objet « Bon de commande » | BC-2026-011
+PASS 12.2 Nouveau BC prend le nouveau préfixe | BCX-2026-001
+PASS 13.1 Colonnes du suivi financier | N° BC|Objet|Fournisseur|Activités|Montant TTC|Facturé TTC|Payé TTC|Reste à payer|Avancement
+PASS 13.2 Actualiser : facturé et payé évoluent
+PASS 13.3 BC annulé (003) : engagement annulé, reste 0
+PASS 14.1 Filtre par statut | BC-2026-007,BC-2026-006,BC-2026-003
+PASS 14.2 Clic sur la ligne : consultation (circuit, échanges compta, historique)
+PASS 14.3 Données conservées après rechargement | BC-2026-001:Réceptionné, BC-2026-002:Réceptionné, BC-2026-003:Annulé, BC-2026-004:Validé, BC-2026-005:Rejeté, BC-2026-006:Annulé, BC-2026-007:Annulé, BC-2026-008:Réceptionné, BC-2026-009:Transmis au PPM, BC-2026-010:En attente de validation
+PASS 15.1 Aucune erreur JavaScript venant du module BC | erreurs préexistantes de l’application : 15
+TOTAL 58 FAIL 0

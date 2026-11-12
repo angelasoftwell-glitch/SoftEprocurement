@@ -21,7 +21,7 @@
   "id": "1.4",
   "lib": "Colonnes de la liste",
   "ok": true,
-  "info": ""
+  "info": "N° BC|Objet|Fournisseur|Activité|Montant TTC|Date|Statut|Actions"
  },
  {
   "id": "1.5",
@@ -45,7 +45,7 @@
   "id": "2.3",
   "lib": "Catégorie filtrée par le financement",
   "ok": true,
-  "info": ""
+  "info": "CAT-01,CAT-02,CAT-03"
  },
  {
   "id": "2.4",
@@ -81,7 +81,7 @@
   "id": "3.1",
   "lib": "Menu ⋮ : Consulter, Modifier, Annuler",
   "ok": true,
-  "info": ""
+  "info": "Consulter|Modifier|Annuler le BC"
  },
  {
   "id": "3.2",
@@ -165,7 +165,7 @@
   "id": "7.2",
   "lib": "Compteur sur l’onglet",
   "ok": true,
-  "info": ""
+  "info": "2"
  },
  {
   "id": "7.3",
@@ -267,7 +267,7 @@
   "id": "11.3",
   "lib": "Mode « PPM » : bouton « Transmettre au PPM »",
   "ok": true,
-  "info": ""
+  "info": "Transmettre au PPM"
  },
  {
   "id": "11.4",
@@ -279,7 +279,7 @@
   "id": "11.5",
   "lib": "Devise MGA : montant converti et comparé au seuil EUR",
   "ok": true,
-  "info": ""
+  "info": "✓ Montant 2 000 000 MGA HT (≈ 400 EUR) ≤ seuil du BC (20 000 EUR)"
  },
  {
   "id": "11.6",
@@ -303,13 +303,13 @@
   "id": "12.2",
   "lib": "Nouveau BC prend le nouveau préfixe",
   "ok": true,
-  "info": ""
+  "info": "BCX-2026-001"
  },
  {
   "id": "13.1",
   "lib": "Colonnes du suivi financier",
   "ok": true,
-  "info": ""
+  "info": "N° BC|Objet|Fournisseur|Activités|Montant TTC|Facturé TTC|Payé TTC|Reste à payer|Avancement"
  },
  {
   "id": "13.2",
@@ -327,7 +327,7 @@
   "id": "14.1",
   "lib": "Filtre par statut",
   "ok": true,
-  "info": ""
+  "info": "BC-2026-007,BC-2026-006,BC-2026-003"
  },
  {
   "id": "14.2",
@@ -345,6 +345,6 @@
   "id": "15.1",
   "lib": "Aucune erreur JavaScript venant du module BC",
   "ok": true,
-  "info": "erreurs préexistantes de l’application : 17"
+  "info": "erreurs préexistantes de l’application : 15"
  }
 ]

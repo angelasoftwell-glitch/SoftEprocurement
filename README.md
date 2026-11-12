@@ -154,3 +154,4 @@ Le modèle de données (`d.finance`, offre déposée) reste compatible avec la r
 ## V389 — Test de bout en bout des BC
 - 58 contrôles passés (tests/test_bout_en_bout_bc.js, Playwright).
 - Correction : la saisie dans un champ (quantité, prix, objet, échéance) n était plus perdue quand on cliquait sur le champ suivant.
+- Correction : contrôles et libellé du bouton (Enregistrer / Transmettre au PPM) mis à jour pendant la saisie des articles.
