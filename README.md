@@ -111,3 +111,8 @@ Le modèle de données (`d.finance`, offre déposée) reste compatible avec la r
 - Circuit de validation : Demandeur → RAF (visa) → PRMP / ordonnateur (signature), mêmes habilitations que le visa des contrats ; affiché dans le formulaire et la fiche du BC.
 - Nouvelle page Paramétrage › Bons de commande : seuil par type d'achat (Fournitures / Services / Travaux), alerte « proche du seuil », cumul bloquant ou alerte, période du cumul, format de numérotation, modèle d'impression.
 - Contrôle des seuils par fournisseur et type d'achat, selon le paramétrage.
+
+## V381 — Circuit du BC paramétrable dans Workflows
+- Nouveau type de validation « Bons de commande » dans Paramétrage › Workflows (préfixe WF-BC), avec deux workflows d'exemple : WF-BC-01 (3 étapes) et WF-BC-02 (2 étapes).
+- Paramétrage › Bons de commande : choix du workflow appliqué (plus de circuit figé).
+- À la soumission, le BC fige la version du workflow ; « Valider : <étape> » fait avancer étape par étape ; la dernière étape approuve le BC et le génère dans Softaccounting.
