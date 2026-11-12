@@ -130,3 +130,9 @@ Le modèle de données (`d.finance`, offre déposée) reste compatible avec la r
 - Bouton « Ouvrir dans Validation » supprimé.
 - Le modèle d'édition se choisit dans la fenêtre « Éditer le BC » (retiré du Paramétrage).
 - Fenêtre « Générer » : toutes les données envoyées à SoftAccounting, avec libellé, activité, financement et catégorie modifiables et contrôle du crédit.
+
+## V384 — Bons de commande : devise, génération dédiée
+- Paramétrage : seuil + devise ; si le montant dépasse le seuil : bloquer le BC ou générer vers le PPM. Cumul, alerte et période supprimés.
+- Saisie : liste des devises (conversion indicative pour comparer au seuil).
+- Liste : badge « fractionnement » supprimé ; après validation, boutons Éditer et Réceptionner ; menu ⋮ = Consulter, Modifier, Annuler.
+- Onglet « Contrôle des seuils » remplacé par « Génération BC » : BC validés à générer ; un BC généré sort de la liste.
