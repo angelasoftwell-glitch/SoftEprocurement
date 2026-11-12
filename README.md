@@ -123,3 +123,10 @@ Le modèle de données (`d.finance`, offre déposée) reste compatible avec la r
 - Numérotation depuis le menu Bons de commande (même modale que le PPM).
 - Liste : N° BC, Objet, Fournisseur, Activités, Montant, Date, Statut ; actions en icônes ; passage automatique en attente de validation.
 - Annulation de BC avec motif ; suppression du suivi par ligne budgétaire.
+
+## V383 — Bons de commande : actions simplifiées
+- Clic sur une ligne = Consulter ; un seul bouton « étape suivante » (Modifier, Générer, Réceptionner, Éditer) + menu ⋮ pour le reste.
+- Statuts : En attente de validation, Validé, Réceptionné (partiel/total), Annulé ; pastille « SoftAccounting ✓ » quand le BC est généré.
+- Bouton « Ouvrir dans Validation » supprimé.
+- Le modèle d'édition se choisit dans la fenêtre « Éditer le BC » (retiré du Paramétrage).
+- Fenêtre « Générer » : toutes les données envoyées à SoftAccounting, avec libellé, activité, financement et catégorie modifiables et contrôle du crédit.
