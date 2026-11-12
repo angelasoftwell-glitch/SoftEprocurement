@@ -143,3 +143,6 @@ Le modèle de données (`d.finance`, offre déposée) reste compatible avec la r
 
 ## V386 — Bons de commande
 - Suppression des KPI en haut des pages BC.
+
+## V387 — Bons de commande
+- Tableau de la liste uniformisé : largeurs fixes, lignes de même hauteur (texte sur 2 lignes max, complet au survol), actions alignées, pastille « SA ✓ » compacte.
