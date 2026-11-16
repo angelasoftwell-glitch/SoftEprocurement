@@ -155,3 +155,11 @@ Le modèle de données (`d.finance`, offre déposée) reste compatible avec la r
 - 58 contrôles passés (tests/test_bout_en_bout_bc.js, Playwright).
 - Correction : la saisie dans un champ (quantité, prix, objet, échéance) n était plus perdue quand on cliquait sur le champ suivant.
 - Correction : contrôles et libellé du bouton (Enregistrer / Transmettre au PPM) mis à jour pendant la saisie des articles.
+
+## V390 — Report de la date limite de remise des offres
+- Nouvelle date d ouverture modifiable (recalculée par défaut avec le même écart).
+- Date limite des questions décalée du même nombre de jours, modifiable ; contrôles (ouverture après la date limite, questions avant).
+- Alerte si l ouverture dépasse la validité des offres déjà déposées (90 jours par défaut).
+- Pièce jointe « Décision signée » (PDF), option de publication avec l additif.
+- Rappels J-3 et J-1 recalculés, convocation à la séance d ouverture renvoyée à la commission, traces dans l historique.
+- Export Excel (CSV) de l historique des reports.
